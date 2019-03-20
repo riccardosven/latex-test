@@ -1,0 +1,10 @@
+language: R
+git:
+  quiet: true
+
+script:
+  - git show [HEAD^]:test.tex > old.tex
+  - latexdiff old.tex test.tex > diff.tex
+  - latexmk -pdf test.tex
+  - latexmk -pdf diff.tex
+
