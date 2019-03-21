@@ -1,10 +1,10 @@
-language: R
-git:
-  quiet: true
+services:
+  - docker
+  
+before_install:
+  - docker run -dit --name texlive -v $(pwd):/src texlive/texlive
+  - docker exec -it texlive tlmgr install latexmk collection-latex collection-fontsrecommended koma-script
+  - docker exec -it texlive path add latexmk 
 
 script:
-  - git show [HEAD^]:test.tex > old.tex
-  - latexdiff old.tex test.tex > diff.tex
-  - latexmk -pdf test.tex
-  - latexmk -pdf diff.tex
-
+  - docker exec -it texlive latexmk -pdf src/test.tex
