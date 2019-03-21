@@ -2,14 +2,7 @@ services:
   - docker
   
 before_install:
-  - docker run -dit --name texlive -v $(pwd):/src texlive/texlive
-  - docker exec -it texlive tlmgr update --self
-  - docker exec -it texlive tlmgr install latexmk collection-latex collection-fontsrecommended koma-script
-  - docker exec -it texlive tlmgr path add latexmk
-  - |
-    docker exec -it texlive tlmgr install \
-      lipsum \
-      booktabs
-
+  - docker run -dit --name tectonic -v $(pwd):/src rekka/tectonic
+  
 script:
-  - docker exec -it texlive latexmk -pdf src/test.tex
+  - docker exec -it tectonic tectonic src/test.tex
