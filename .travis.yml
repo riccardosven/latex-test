@@ -2,7 +2,7 @@ services:
   - docker
   
 before_install:
-  - docker run -dit --name tectonic -v $(pwd):/src rekka/tectonic
-  
+  - docker pull rekka/tectonic
 script:
-  - docker exec -it tectonic tectonic src/test.tex
+  - docker run -dit --name tectonic -v $(pwd):/src rekka/tectonic  tectonic /src/test.tex
+  
