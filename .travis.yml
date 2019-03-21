@@ -3,7 +3,7 @@ services:
   
 before_install:
   - docker run -dit --name texlive -v $(pwd):/src texlive/texlive
-  - docker exec -it texlive update --self
+  - docker exec -it texlive tlmgr update --self
   - docker exec -it texlive tlmgr install latexmk collection-latex collection-fontsrecommended koma-script
   - docker exec -it texlive tlmgr path add latexmk
   - docker exec -it texlive tlmgr install \
